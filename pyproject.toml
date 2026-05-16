@@ -4,8 +4,8 @@ build-backend = "setuptools.backends._legacy:_Backend"
 
 [project]
 name = "zepto-cli"
-version = "0.1.0"
-description = "🥬 Your AI agent's grocery arm — order Zepto from terminal or agent (India only)"
+version = "0.2.0"
+description = "🥬 Your AI agent's grocery arm — order Zepto or Blinkit from terminal or agent (India only)"
 readme = "README.md"
 authors = [
     { name = "Rishi" },
@@ -15,7 +15,7 @@ requires-python = ">=3.10"
 dependencies = [
     "playwright>=1.40",
 ]
-keywords = ["zepto", "grocery", "delivery", "cli", "agent", "india", "hermes", "openclaw", "india-only"]
+keywords = ["zepto", "blinkit", "grocery", "delivery", "cli", "agent", "india", "hermes", "openclaw", "quick-commerce"]
 
 [project.urls]
 Homepage = "https://github.com/LoneTraderRishi/zepto-cli"
