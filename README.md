@@ -51,8 +51,12 @@ All through Hermes Agent, OpenClaw, Claude Code, or any Python-capable agent.
 ## 🚀 Human Quick Start
 
 ```bash
-# 1. Install
+# Default: install with CloakBrowser (stealth Chromium, auto-downloads binary)
 pip install zepto-cli
+
+# Alternative: use raw Playwright instead (if CloakBrowser has issues)
+pip install zepto-cli[playwright]
+playwright install chromium
 
 # 2. Login (one-time per store)
 zepto login                          # Zepto (default) — auto-downloads stealth Chromium

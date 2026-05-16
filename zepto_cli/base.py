@@ -40,17 +40,24 @@ class AbstractGroceryBot(ABC):
         self.context = None
         self.page = None
         self.logged_in = False
+        self._pw = None  # Used by Playwright fallback only
 
     # ── Lifecycle ────────────────────────────────────────────
 
     def start(self):
-        from cloakbrowser import launch
-        self.browser = launch(
-            headless=self.headless,
-            humanize=True,
-            timezone="Asia/Kolkata",
-            locale="en-IN",
-        )
+        try:
+            from cloakbrowser import launch
+            self.browser = launch(
+                headless=self.headless,
+                humanize=True,
+                timezone="Asia/Kolkata",
+                locale="en-IN",
+            )
+        except ImportError:
+            # Fallback: raw Playwright
+            from playwright.sync_api import sync_playwright
+            self._pw = sync_playwright().start()
+            self.browser = self._pw.chromium.launch(headless=self.headless)
         kwargs = {
             "viewport": {"width": 1280, "height": 800},
             "locale": "en-IN",
@@ -70,6 +77,11 @@ class AbstractGroceryBot(ABC):
         try:
             if self.browser:
                 self.browser.close()
+        except:
+            pass
+        try:
+            if self._pw:
+                self._pw.stop()
         except:
             pass
 

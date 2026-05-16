@@ -15,6 +15,8 @@ requires-python = ">=3.10"
 dependencies = [
     "cloakbrowser>=0.3.28",
 ]
+[project.optional-dependencies]
+playwright = ["playwright>=1.40"]
 keywords = ["zepto", "blinkit", "grocery", "delivery", "cli", "agent", "india", "hermes", "openclaw", "quick-commerce"]
 
 [project.urls]
