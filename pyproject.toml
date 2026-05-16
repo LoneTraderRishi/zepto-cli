@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "zepto-cli"
+version = "0.1.0"
+description = "🥬 Order groceries from Zepto — from your terminal, scripts, or AI agent"
+readme = "README.md"
+authors = [
+    { name = "Rishi" },
+]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+    "playwright>=1.40",
+]
+keywords = ["zepto", "grocery", "delivery", "cli", "agent", "india", "hermes", "openclaw"]
+
+[project.urls]
+Homepage = "https://github.com/LoneTraderRishi/zepto-cli"
+Repository = "https://github.com/LoneTraderRishi/zepto-cli"
+Documentation = "https://github.com/LoneTraderRishi/zepto-cli#readme"
+
+[project.scripts]
+zepto = "zepto_cli.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
