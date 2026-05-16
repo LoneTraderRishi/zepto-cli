@@ -1,6 +1,6 @@
 <div align="center">
   <h1>🥬 Zepto CLI</h1>
-  <p><strong>Your AI agent's grocery arm — search, manage, and order household essentials from Zepto.</strong></p>
+  <p><strong>Your AI agent's grocery arm — search, manage, and order household essentials from Zepto (India only).</strong></p>
   <p>
     <a href="#features"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.github.com%2Frepos%2FLoneTraderRishi%2Fzepto-cli&query=stargazers_count&style=for-the-badge&logo=github&label=stars&color=yellow" alt="Stars"></a>
     <img src="https://img.shields.io/badge/python-3.10%2B-blue?style=for-the-badge&logo=python" alt="Python">
@@ -14,6 +14,7 @@ Give your AI agent the power to search Zepto, manage your cart, and keep your ki
 
 Uses **Playwright** under the hood. One-time OTP login, persistent sessions. No API keys needed — your agent drives Zepto like a human.
 
+> ⚠️ **India only.** Zepto delivers in 20+ Indian cities. Does NOT work outside India.
 > ⚠️ **Payment is manual** — the bot gets your cart ready and you tap Pay on your phone. Zepto requires UPI PIN / Bank OTP which can't be automated.
 
 ---
