@@ -12,7 +12,7 @@
 
 Give your AI agent the power to search Zepto or Blinkit, manage your cart, and keep your kitchen stocked — all from a text message, a cron job, or a skill.
 
-Uses **Playwright** under the hood. One-time OTP login, persistent sessions per store. No API keys needed — your agent drives the store like a human.
+Uses **CloakBrowser** under the hood — a stealth Chromium binary with 57 C++ patch levels that passes bot detection. One-time OTP login, persistent sessions per store. No API keys needed — your agent drives the store like a human.
 
 > ⚠️ **India only.** Zepto and Blinkit only deliver in Indian cities. Does NOT work outside India.
 > ⚠️ **Payment is manual** — the bot gets your cart ready and you tap Pay on your phone. UPI PIN / Bank OTP can't be automated.
@@ -54,11 +54,8 @@ All through Hermes Agent, OpenClaw, Claude Code, or any Python-capable agent.
 # 1. Install
 pip install zepto-cli
 
-# 2. Install browser driver
-playwright install chromium
-
-# 3. Login (one-time per store)
-zepto login                          # Zepto (default)
+# 2. Login (one-time per store)
+zepto login                          # Zepto (default) — auto-downloads stealth Chromium
 zepto login --store blinkit          # Blinkit (separate session)
 
 # 4. Search products
@@ -243,7 +240,7 @@ zepto cart --store blinkit --list
 
 ## ⚙️ How It Works
 
-1. **Playwright** launches a headless Chromium browser
+1. **CloakBrowser** launches a stealth Chromium (57 C++ patches, bypasses bot detection)
 2. Sets geolocation to Mumbai (override with `set_location()`)
 3. Login sends an OTP — you enter it once per store
 4. Cookies persist to `~/.<store>_session.json` — reused by your agent automatically

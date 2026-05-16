@@ -36,7 +36,6 @@ class AbstractGroceryBot(ABC):
     def __init__(self, session_path: Optional[str] = None, headless: bool = True):
         self.session_path = session_path or f"/tmp/{self.__class__.__name__.lower()}_session.json"
         self.headless = headless
-        self._pw = None
         self.browser = None
         self.context = None
         self.page = None
@@ -45,16 +44,19 @@ class AbstractGroceryBot(ABC):
     # ── Lifecycle ────────────────────────────────────────────
 
     def start(self):
-        from playwright.sync_api import sync_playwright
-        self._pw = sync_playwright().start()
-        self.browser = self._pw.chromium.launch(headless=self.headless)
+        from cloakbrowser import launch
+        self.browser = launch(
+            headless=self.headless,
+            humanize=True,
+            timezone="Asia/Kolkata",
+            locale="en-IN",
+        )
         kwargs = {
             "viewport": {"width": 1280, "height": 800},
             "locale": "en-IN",
             "timezone_id": "Asia/Kolkata",
-            "geolocation": {"latitude": 19.0760, "longitude": 72.8777},
+            "geolocation": {"latitude": 19.1908, "longitude": 72.8326},
             "permissions": ["geolocation"],
-            "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
         }
         if os.path.exists(self.session_path):
             kwargs["storage_state"] = self.session_path
@@ -68,8 +70,6 @@ class AbstractGroceryBot(ABC):
         try:
             if self.browser:
                 self.browser.close()
-            if self._pw:
-                self._pw.stop()
         except:
             pass
 
