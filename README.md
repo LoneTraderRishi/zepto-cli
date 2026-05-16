@@ -175,7 +175,8 @@ zepto order "brown bread, whole wheat bread, amul milk 1L, eggs 12, apple 1kg, b
 | `.set_location(lat, lon)` | `True` / `False` | Change delivery area |
 | `.search(query)` | `list[dict]` | Search products → `[{name, price, mrp, quantity}]` |
 | `.add_to_cart(index=0)` | `True` / `False` | Click ADD on Nth card |
-| `.get_cart_count()` | `int` | Items in cart |
+| `.get_cart_count()` | `int` | Items count in cart |
+| `.get_cart_items()` | `list[dict]` | Detailed cart items → `[{name, quantity, price}]` |
 | `.go_home()` | — | Navigate to zepto.com |
 
 ### CLI
@@ -184,9 +185,24 @@ zepto order "brown bread, whole wheat bread, amul milk 1L, eggs 12, apple 1kg, b
 zepto login [--phone NUMBER]          One-time OTP login
 zepto search <query> [--limit N]      Search products
 zepto add [--search <query>] [--index N]  Add to cart
-zepto cart                            Show cart count
+zepto cart [-l/--list]                Show cart count (add --list to see items)
 zepto order "<item1>, <item2>, ..."   Full search + add flow
 ```
+
+### Check what's in your cart
+
+```bash
+# Quick count
+zepto cart
+# 🛒 Cart: 3 items
+
+# Full item list
+zepto cart --list
+# 🛒 Cart: 3 items
+#
+#   • Amul Taaza Milk 500 ml     ₹34
+#   • Eggoz Farm Fresh Eggs      ₹76
+#   • Britannia Whole Wheat Bread ₹54
 
 ---
 

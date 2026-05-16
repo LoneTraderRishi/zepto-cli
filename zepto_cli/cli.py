@@ -80,8 +80,26 @@ def cmd_cart(args):
         return
     count = bot.get_cart_count()
     print(f"🛒 Cart: {count} item{'s' if count != 1 else ''}")
-    if count > 0:
-        print("Open https://www.zepto.com in your browser to see details.")
+
+    if args.list:
+        if count == 0:
+            print("   (empty cart)")
+        else:
+            items = bot.get_cart_items()
+            if items:
+                print()
+                for item in items:
+                    line = f"   • {item['name']}"
+                    if item.get('quantity'):
+                        line += f"  ×{item['quantity']}"
+                    if item.get('price'):
+                        line += f"  {item['price']}"
+                    print(line)
+            else:
+                print("   (could not parse items — open zepto.com to see details)")
+    elif count > 0 and not args.list:
+        print("   Use `zepto cart --list` to see items")
+
     bot.close()
 
 
@@ -139,7 +157,8 @@ Examples:
     p_add.add_argument("--search", help="Search then add")
 
     # cart
-    sub.add_parser("cart", help="Show cart count")
+    p_cart = sub.add_parser("cart", help="Show cart count")
+    p_cart.add_argument("--list", "-l", action="store_true", help="List all items in cart")
 
     # order
     p_order = sub.add_parser("order", help="One-shot: search and add multiple items")

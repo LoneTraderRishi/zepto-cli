@@ -215,3 +215,46 @@ class ZeptoBot:
             return int(nums[0]) if nums else 0
         except:
             return 0
+
+    def get_cart_items(self):
+        """Navigate to the cart page and list all items.
+        Returns list of {name, quantity, price, total} or empty list."""
+        try:
+            self.page.goto("https://www.zepto.com/cart", wait_until="load", timeout=15000)
+            self._wait(3)
+        except:
+            pass
+
+        items = []
+        # Try parsing item cards on the cart page
+        try:
+            cards = self.page.locator('[data-testid="cart-item"]')
+            if cards.count() == 0:
+                # Fallback: try generic item containers
+                cards = self.page.locator('div[class*="cart"] div[class*="item"]')
+            if cards.count() == 0:
+                # Last resort: grab all visible product-like rows
+                cards = self.page.locator('div:has(> button)').filter(has_text="₹")
+
+            for i in range(min(cards.count(), 50)):
+                try:
+                    text = cards.nth(i).inner_text()
+                    lines = [l.strip() for l in text.split('\n') if l.strip()]
+                    if not lines:
+                        continue
+                    name = lines[0]
+                    price = ""
+                    qty = ""
+                    for line in lines[1:]:
+                        if line.startswith("₹"):
+                            price = line
+                        elif line.isdigit() or "x" in line.lower():
+                            qty = line
+                    if name and price:
+                        items.append({"name": name, "quantity": qty, "price": price})
+                except:
+                    pass
+        except:
+            pass
+
+        return items
