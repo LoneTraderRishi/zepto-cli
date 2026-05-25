@@ -1,9 +1,9 @@
 [build-system]
 requires = ["setuptools>=64", "wheel"]
-build-backend = "setuptools.backends._legacy:_Backend"
+build-backend = "setuptools.build_meta"
 
 [project]
-name = "zepto-cli"
+name = "zepto-blinkit"
 version = "0.2.1"
 description = "🥬 Your AI agent's grocery arm — order Zepto or Blinkit from terminal or agent (India only)"
 readme = "README.md"
@@ -20,12 +20,13 @@ playwright = ["playwright>=1.40"]
 keywords = ["zepto", "blinkit", "grocery", "delivery", "cli", "agent", "india", "hermes", "openclaw", "quick-commerce"]
 
 [project.urls]
-Homepage = "https://github.com/LoneTraderRishi/zepto-cli"
-Repository = "https://github.com/LoneTraderRishi/zepto-cli"
-Documentation = "https://github.com/LoneTraderRishi/zepto-cli#readme"
+Homepage = "https://github.com/LoneTraderRishi/zepto-blinkit"
+Repository = "https://github.com/LoneTraderRishi/zepto-blinkit"
+Documentation = "https://github.com/LoneTraderRishi/zepto-blinkit#readme"
 
 [project.scripts]
 zepto = "zepto_cli.cli:main"
+zb = "zepto_cli.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
